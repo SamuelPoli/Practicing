@@ -2,7 +2,9 @@ public class app {
 
     public static void main (String[] args){
         app app1 = new app("Saludar");
-        app1.Hello;
+        System.out.println(app1.getName());
+        app1.Hello();
+    
     }
 
     private String name;
@@ -11,8 +13,12 @@ public class app {
         this.name=name;
     }
 
-    public static String Hello(){
+    public void Hello(){
         System.out.println("Hi");
+    }
+
+    public String getName(){
+        return this.name;
     }
 
 }
