@@ -67,7 +67,7 @@ public class Servidor {
 	
 	@SuppressWarnings("unused")
 	private void HiloServidor(String socket2) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 

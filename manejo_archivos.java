@@ -26,7 +26,7 @@ public class manejo_archivos {
         try {
             app.Operaciones(path, operacion);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
+            
             e.printStackTrace();
         }
     }
