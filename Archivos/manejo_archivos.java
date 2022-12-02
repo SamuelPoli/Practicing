@@ -1,3 +1,4 @@
+package Archivos;
 import java.io.IOException;
 import java.nio.file.*;
 import javax.swing.*;

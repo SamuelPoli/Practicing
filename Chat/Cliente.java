@@ -1,12 +1,23 @@
-import javax.swing.*;
-import java.awt.*;
-import java.net.*;
-import java.io.*;
-import java.awt.event.*;
+package Chat;
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
 
-public class Servidor {
-	@SuppressWarnings("unused")
-	private static final String Socket = null;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
+public class Cliente {
+	
 	JFrame ventana_chat = null;
 	JButton btn_enviar = null;
 	JTextField txt_mensaje = null;
@@ -14,18 +25,17 @@ public class Servidor {
 	JPanel contenedor_areachat = null;
 	JPanel contenedor_btntxt = null;
 	JScrollPane scroll = null;
-	ServerSocket servidor = null;
 	Socket socket = null;
 	BufferedReader lector = null;
 	PrintWriter escritor = null;
 	
-	public Servidor (){
+	public Cliente() {
 		hacerInterfaz();
-		
-}
+	}
 	
+	@SuppressWarnings("unused")
 	public void hacerInterfaz() {
-		ventana_chat = new JFrame("Servidor");
+		ventana_chat = new JFrame("Cliente");
 		btn_enviar = new JButton("Enviar");
 		txt_mensaje = new JTextField(4);
 		area_chat = new JTextArea(10,12);
@@ -45,40 +55,33 @@ public class Servidor {
 		ventana_chat.setResizable(false);
 		ventana_chat.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-				
-		Thread principal = new Thread(new Runnable(){
+		JOptionPane.showMessageDialog(null, "A continuacion se iniciarÃ¡ la comunicaciÃ³n con el servidor");
+		String ip = JOptionPane.showInputDialog("Ingrese la IP a conectar");
+		int puerto = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el puerto a conectar"));
+		String nombre = JOptionPane.showInputDialog("Ingrese nombre de usuario");
+		
+		Thread principal = new Thread(new Runnable() {
 			public void run(){
 				try{
-				servidor = new ServerSocket(9000);
-					while(true){
-						socket = servidor.accept();
-						leer();
-						escribir();
-					}
-				
+				socket = new Socket(ip,puerto);
+				leer();
+				escribir();
 				}catch(Exception ex){
 					ex.printStackTrace();
 				}
 			}
 		});
-		
 		principal.start();
-	}
+	}	
 	
-	@SuppressWarnings("unused")
-	private void HiloServidor(String socket2) {
-		
-		
-	}
-
 	public void leer(){
 		Thread leer_hilo = new Thread(new Runnable(){
 			public void run(){
 				try{
 					lector = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-						while (true){
+						while(true){
 							String mensaje_recibido = lector.readLine();
-							area_chat.append("cliente dice: "+mensaje_recibido+"\n");
+							area_chat.append("servidor dice: "+mensaje_recibido+"\n");
 										
 						}
 				}catch(Exception ex){
@@ -111,9 +114,10 @@ public class Servidor {
 		});
 		escribir_hilo.start();
 	}
-		public static void main(String[] args) {
-		
-		new Servidor();
+
+	public static void main(String[] args) {
+	
+		new Cliente();
 
 	}
 
