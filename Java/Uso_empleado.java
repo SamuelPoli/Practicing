@@ -23,11 +23,12 @@ public class Uso_empleado {
         + " Fecha de alta: "+empleado3.getAltaContrato());
         */
 
-        empleado[] misEmpleados = new empleado[3];
+        empleado[] misEmpleados = new empleado[4];
 
         misEmpleados[0]= new empleado("Paco Gomez", 85000, 1990, 12, 17);
         misEmpleados[1]= new empleado("Ana Lopez", 95000, 1995, 6, 2);
         misEmpleados[2]= new empleado("Maria Martin", 105000, 2002, 3, 15);
+        misEmpleados[3]= new empleado("Antonio Fernandez");
         
         for (empleado e : misEmpleados) {
             e.subesueldo(5);
@@ -55,6 +56,12 @@ class empleado{
         altaContrato=calendario.getTime();
         Id=IdSiguiente;
         IdSiguiente++;
+    }
+
+    //El this llama al otro constructor para darle
+    //datos predefinidos
+    public empleado(String nombre){
+        this(nombre, 30000, 2000, 1, 1);
     }
 
     public String getNombre() {
