@@ -1,6 +1,5 @@
 package Java;
 
-
 import java.util.*;
 
 public class Uso_empleado {
@@ -36,17 +35,20 @@ public class Uso_empleado {
         misEmpleados[5]= new Jefatura("María", 95000, 1999, 5, 26);
         Jefatura jefa_finanzas = (Jefatura) misEmpleados[5];
         jefa_finanzas.setIncentivo(55000);
-        
+        System.out.println("El jefe "+jefa_finanzas.getNombre()+
+        " tiene un bono de "+jefa_finanzas.establece_bonus(500));
+        System.out.println(misEmpleados[3].getNombre()+
+        " tiene un bono de "+misEmpleados[3].establece_bonus(200));
+
         //Ordenado por sueldo
         Arrays.sort(misEmpleados);
+        System.out.println(jefa_finanzas.tomar_decisiones("Subir sueldo"));
         
         for (empleado e : misEmpleados) {
             e.subesueldo(5);
             System.out.println("ID: "+ e.getId()+" Nombre: "+e.getNombre() + " Sueldo: "+e.getSueldo()
             + " Fecha de alta: "+e.getAltaContrato());
         }
-
-        
 
         System.out.println(empleado.getIdSiguiente());
 
@@ -61,7 +63,7 @@ public class Uso_empleado {
     }
 }
 
-class empleado extends Persona implements Comparable{
+class empleado extends Persona implements Comparable, Trabajadores{
 
     
     private double sueldo;
@@ -131,10 +133,16 @@ class empleado extends Persona implements Comparable{
         else
             return 0;
     }
+
+    @Override
+    public double establece_bonus(double gratificacion) {
+        
+        return Trabajadores.bonus_base+gratificacion;
+    }
 }
 
 //el modificador final establece que la clase no se puede heredar
-class Jefatura extends empleado{
+class Jefatura extends empleado implements Jefes{
 
     private double incentivo;
     
@@ -151,6 +159,17 @@ class Jefatura extends empleado{
     public double getSueldo() {
         double sueldoJefe = super.getSueldo();
         return sueldoJefe + incentivo;
+    }
+
+    @Override
+    public String tomar_decisiones(String decision) {
+        return "Toma decision de "+decision;
+    }
+
+    @Override
+    public double establece_bonus(double gratificacion) {
+        double prima=2000;
+        return Trabajadores.bonus_base+gratificacion+prima;
     }
 }
 

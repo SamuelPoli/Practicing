@@ -14,7 +14,7 @@ public class Generador extends Thread {
             try {
                 sleep((int)(Math.random()*100));
             } catch (InterruptedException e) {
-                // TODO: handle exception
+                
             }       
         }
     }

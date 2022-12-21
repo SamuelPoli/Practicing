@@ -20,7 +20,7 @@ public class Contenedor {
             try {
                 wait();
             } catch (InterruptedException e) {
-                // TODO: handle exception
+                
             }
         }
         dato=valor;
