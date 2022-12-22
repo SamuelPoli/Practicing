@@ -40,11 +40,20 @@ class LaminaBotones extends JPanel implements ActionListener{
         //1 Objeto Evento: Action
         //2 Objeto Fuente: botonAzul
         //3 Objeto Listener: this
+        
+        /*Como la clase LaminaBotones es quien implementa la 
+         * interfaz ActionListener no se debe instanciar un nuevo 
+         * objeto sino pasar la referencia this al metodo addActionListener
+         * y definir el metodo actionPerformed
+         */
         botonAzul.addActionListener(this);
         botonAmarillo.addActionListener(this);
         botonRojo.addActionListener(this);
+
+        //Eventos mievento = new Eventos();
     }
 
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         
@@ -59,5 +68,27 @@ class LaminaBotones extends JPanel implements ActionListener{
         
         
     }
+
+    /*Con una clase interna se debe instanciar la clase dentro
+     * del constructor y pasarle el objeto al metodo addActionListener
+     * en el constructor está comentado el objeto "mievento"
+     */
+    private class Eventos implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Object botonPulsado=e.getSource();
+
+            if(botonPulsado==botonAzul)
+            setBackground(Color.BLUE);
+            else if (botonPulsado==botonAmarillo)
+            setBackground(Color.YELLOW);
+            else
+            setBackground(Color.RED);
+            
+        }
+
+    }
+    
 
 }
