@@ -6,11 +6,22 @@ import javax.swing.*;
 public class MarcoCentrado {
     public static void main(String[] args) {
         MCentrado mimarco = new MCentrado();
+        mimarco.iniciar();
     }
 }
 
 class MCentrado extends JFrame{
+    
+    /*Se puede incluir la misma información del
+     * metodo iniciar en el constructor y en el main
+     * ya no sería necesario llamar al metodo iniciar
+     * sino solamente construir el objeto
+     */
     public MCentrado(){
+        
+    }
+
+    public void iniciar(){
         Toolkit mipantalla = Toolkit.getDefaultToolkit();
         Dimension tamanoPantalla = mipantalla.getScreenSize();
         int anchoPantalla = tamanoPantalla.width;

@@ -7,13 +7,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
+    
 public class MarcoEventos {
     
     public static void main(String[] args) {
         MarcoConTexto mimarco = new MarcoConTexto();
         mimarco.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        
     }
 
 }
@@ -44,13 +44,17 @@ class LaminaBotones extends JPanel implements ActionListener{
         /*Como la clase LaminaBotones es quien implementa la 
          * interfaz ActionListener no se debe instanciar un nuevo 
          * objeto sino pasar la referencia this al metodo addActionListener
-         * y definir el metodo actionPerformed
+         * y definir el metodo actionPerformed,
+         * la otra opción es crear una clase interna que implemente la interfaz
+         * e instanciar un objeto de dicha interfaz y pasarlo al metodo addActionListener
          */
+
+        //Eventos mievento = new Eventos();
         botonAzul.addActionListener(this);
         botonAmarillo.addActionListener(this);
         botonRojo.addActionListener(this);
 
-        //Eventos mievento = new Eventos();
+        
     }
 
     
@@ -73,7 +77,7 @@ class LaminaBotones extends JPanel implements ActionListener{
      * del constructor y pasarle el objeto al metodo addActionListener
      * en el constructor está comentado el objeto "mievento"
      */
-    private class Eventos implements ActionListener{
+/*  private class Eventos implements ActionListener{
 
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -89,6 +93,6 @@ class LaminaBotones extends JPanel implements ActionListener{
         }
 
     }
-    
+*/    
 
 }

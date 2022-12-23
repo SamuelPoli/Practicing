@@ -3,7 +3,7 @@ package Graficos;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.*;
-import java.awt.geom.*;
+
 
 public class pruebaDibujo3 {
     public static void main(String[] args) {
