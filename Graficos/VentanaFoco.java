@@ -17,6 +17,8 @@ import java.awt.event.*;
  * No se puede hacer lo mismo reemplazando el metodo iniciar por un constructor y llamando
  * a dicho constructor en el main porque las variables de clase se están instanciando con el mismo
  * constructor
+ * Sin embargo no hay necesidad de extender JFrame si se utilizan las variables de clase de tipo
+ * JFrame, ver VentanaFocoV2
  */
 public class VentanaFoco extends JFrame implements WindowFocusListener{
     VentanaFoco marco1;
