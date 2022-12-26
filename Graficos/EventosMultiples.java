@@ -17,12 +17,12 @@ public class EventosMultiples {
 class Marco1 extends JFrame{
     public Marco1(){
         setVisible(true);
-        //setBounds(600, 300, 500, 300);
+        
         LaminaMultiple lamina = new LaminaMultiple();
         //FlowLayout disposicion = new FlowLayout(FlowLayout.RIGHT);
         //lamina.setLayout(disposicion);
         add(lamina);
-        setSize(200, 200);
+        setBounds(600, 300, 500, 300);
 
     }
 }
