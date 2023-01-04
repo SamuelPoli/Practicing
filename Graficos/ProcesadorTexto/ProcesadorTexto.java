@@ -80,12 +80,13 @@ class Lamina_Texto extends JPanel{
 
         @Override
         public void actionPerformed(ActionEvent e) {
-           String tipo = (String)e.getSource();
+           String tipo = e.getSource().toString();
             
            int est =  texto.getFont().getStyle();
            int tam =  texto.getFont().getSize();
 
-          
+           System.out.println("t: "+tipo+" e: "+est+" t: "+tam);
+          /* 
            switch (tipo) {
             case "courier":
                 texto.setFont(new Font("Courier", est, tam));
@@ -99,9 +100,9 @@ class Lamina_Texto extends JPanel{
                 texto.setFont(new Font("Verdana", est, tam));
                 break;
            }
-            
+         */   
         }
-
+        
     }
 
     private class Eventos_estilo implements ActionListener{
