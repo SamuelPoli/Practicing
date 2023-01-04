@@ -67,40 +67,35 @@ class Lamina_Texto extends JPanel{
         texto = new JTextPane();
         add(barra, BorderLayout.NORTH);
         add(texto, BorderLayout.CENTER);
-        courier.addActionListener(new Eventos_Fuente());
-        arial.addActionListener(new Eventos_Fuente());
-        verdana.addActionListener(new Eventos_Fuente());
+        Eventos_Fuente evfte = new Eventos_Fuente();
+        Eventos_estilo evest= new Eventos_estilo();
+        Eventos_tam evtam = new Eventos_tam();
+        courier.addActionListener(evfte);
+        arial.addActionListener(evfte);
+        verdana.addActionListener(evfte);
+        negrita.addActionListener(evest);
+        cursiva.addActionListener(evest);
+        diez.addActionListener(evtam);
+        catorce.addActionListener(evtam);
+        dieciocho.addActionListener(evtam);
+        veintecuatro.addActionListener(evtam);
         
     
 
         
     }
 
+    
     private class Eventos_Fuente implements ActionListener{
 
         @Override
         public void actionPerformed(ActionEvent e) {
-           String tipo = e.getSource().toString();
-            
+            JMenuItem tipo = (JMenuItem) e.getSource();
+            String t=tipo.getText();
            int est =  texto.getFont().getStyle();
            int tam =  texto.getFont().getSize();
-
-           System.out.println("t: "+tipo+" e: "+est+" t: "+tam);
-          /* 
-           switch (tipo) {
-            case "courier":
-                texto.setFont(new Font("Courier", est, tam));
-                break;
+           texto.setFont(new Font(t, est, tam));
            
-            case "arial":
-                texto.setFont(new Font("Arial", est, tam));
-                break;
-
-            case "verdana":
-                texto.setFont(new Font("Verdana", est, tam));
-                break;
-           }
-         */   
         }
         
     }
@@ -109,18 +104,18 @@ class Lamina_Texto extends JPanel{
 
         @Override
         public void actionPerformed(ActionEvent e) {
-           String estilo_var = (String)e.getSource();
-            
+            JMenuItem tipo = (JMenuItem) e.getSource();
+            String t=tipo.getText();
            String nombre =  texto.getFont().getName();
            int tam =  texto.getFont().getSize();
 
           
-           switch (estilo_var) {
-            case "negrita":
+           switch (t) {
+            case "Negrita":
                 texto.setFont(new Font(nombre, Font.BOLD, tam));
                 break;
            
-            case "cursiva":
+            case "Cursiva":
                 texto.setFont(new Font(nombre, Font.ITALIC, tam));
                 break;
 
@@ -134,26 +129,27 @@ class Lamina_Texto extends JPanel{
 
         @Override
         public void actionPerformed(ActionEvent e) {
-           String taman = (String)e.getSource();
+            JMenuItem tipo = (JMenuItem) e.getSource();
+            String t=tipo.getText();
             
            int est =  texto.getFont().getStyle();
            String nombre =  texto.getFont().getName();
 
           
-           switch (taman) {
-            case "diez":
+           switch (t) {
+            case "10":
                 texto.setFont(new Font(nombre, est, 10));
                 break;
            
-            case "catorce":
+            case "14":
                 texto.setFont(new Font(nombre, est, 14));
                 break;
 
-            case "dieciocho":
+            case "18":
                 texto.setFont(new Font(nombre, est, 18));
                 break;
 
-            case "veintecuatro":
+            case "24":
                 texto.setFont(new Font(nombre, est, 24));
                 break;
 
