@@ -3,7 +3,7 @@ package Graficos;
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
-import java.awt.FlowLayout;
+
 
 public class EventosMultiples {
     public static void main(String[] args) throws Exception {

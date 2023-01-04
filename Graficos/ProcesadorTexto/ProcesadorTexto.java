@@ -1,8 +1,6 @@
 package Graficos.ProcesadorTexto;
 
 import javax.swing.*;
-import javax.swing.text.AttributeSet.FontAttribute;
-
 import java.awt.*;
 import java.awt.event.*;
 
@@ -10,6 +8,7 @@ public class ProcesadorTexto{
 
     public static void main(String[] args) {
         Marco_Texto marco = new Marco_Texto();
+        marco.setVisible(true);
 
     }
 
@@ -24,7 +23,7 @@ class Marco_Texto extends JFrame{
         setBounds(300,300,200,200);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         add(new Lamina_Texto());
-        setVisible(true);
+        
     }
 
 }
