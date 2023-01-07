@@ -34,7 +34,8 @@ class Lamina_Textov2 extends JPanel{
     private JMenu fuente, estilo, tamano;
    
     private JToolBar barra2;
-    
+    //Mejoras: utilizar constante para la primera parte de la ruta de las imagenes
+    //Cargar nuevas imagenes
 
     public Lamina_Textov2(){
 
