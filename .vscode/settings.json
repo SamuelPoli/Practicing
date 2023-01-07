@@ -1,0 +1,5 @@
+{
+    "dataworkspace.excludedProjects": [
+        "Azure_BD/BD_prueba/BD_prueba.sqlproj"
+    ]
+}

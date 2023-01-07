@@ -79,9 +79,9 @@ class Lamina_Texto extends JPanel{
         dieciocho.addActionListener(evtam);
         veintecuatro.addActionListener(evtam);
         
+        
     
 
-        
     }
 
     
