@@ -9,8 +9,6 @@ import java.awt.event.*;
 import java.util.Date;
 
 
-
-
 public class ProyectoCurso {
     public static void main(String[] args) {
         Ventana ventana = new Ventana();
@@ -105,10 +103,6 @@ class Lienzo extends JPanel{
         lienzo1.add(caja5);
         lienzo1.add(caja6);
 
-        
-        
-
-
         JPanel lienzo2 = new JPanel();
         boton = new JButton("Aceptar");
         Accion accion = new Accion();
@@ -201,7 +195,7 @@ class Lienzo extends JPanel{
                     tipo=3;
                     break;
                 case "PLAIN_MESSAGE":
-                    tipo = 4;
+                    tipo = -1;
                     break;
 
             }
@@ -232,16 +226,16 @@ class Lienzo extends JPanel{
             int confirmar = 0;
             switch (op4) {
                 case "DEFAULT_OPTION":
-                    confirmar = 0;
+                    confirmar = -1;
                     break;
                 case "YES_NO_OPTION":
-                    confirmar=1;
+                    confirmar=0;
                     break;
                 case "YES_NO_CANCEL_OPTION":
-                    confirmar=2;
+                    confirmar=1;
                     break;
                 case "OK_CANCEL_OPTION":
-                    confirmar=3;
+                    confirmar=2;
                     break;
                 
 
