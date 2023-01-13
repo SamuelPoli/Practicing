@@ -6,6 +6,8 @@ import javax.swing.border.TitledBorder;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Date;
+
 
 
 
@@ -13,6 +15,7 @@ public class ProyectoCurso {
     public static void main(String[] args) {
         Ventana ventana = new Ventana();
         ventana.setVisible(true); 
+        
 
     }
 }
@@ -80,16 +83,16 @@ class Lienzo extends JPanel{
         crea_boton("Icono", 3, 10);
         crea_boton("Componente", 3, 11);
         crea_boton("Otros", 3, 12);
-        crea_boton("Object", 3, 13);
+        crea_boton("Object[]", 3, 13);
 
         crea_boton("DEFAULT_OPTION", 4, 14);
         crea_boton("YES_NO_OPTION", 4, 15);
         crea_boton("YES_NO_CANCEL_OPTION", 4, 16);
         crea_boton("OK_CANCEL_OPTION", 4, 17);
 
-        crea_boton("String", 5, 18);
-        crea_boton("Icon", 5, 19);
-        crea_boton("Object", 5, 20);
+        crea_boton("String[]", 5, 18);
+        crea_boton("Icon[]", 5, 19);
+        crea_boton("Object[]", 5, 20);
 
         crea_boton("Campo de texto", 6, 21);
         crea_boton("Combo", 6, 22);
@@ -150,7 +153,7 @@ class Lienzo extends JPanel{
 
     }
 
-    private class Accion implements ActionListener{
+    private class Accion extends JOptionPane implements ActionListener{
 
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -183,7 +186,106 @@ class Lienzo extends JPanel{
             
             }
             
-            System.out.println(op1+op2+op3+op4+op5+op6);
+            int tipo = 0;
+            switch (op2) {
+                case "ERROR_MESSAGE":
+                    tipo = 0;
+                    break;
+                case "INFORMATION_MESSAGE":
+                    tipo=1;
+                    break;
+                case "WARNING_MESSAGE":
+                    tipo=2;
+                    break;
+                case "QUESTION_MESSAGE":
+                    tipo=3;
+                    break;
+                case "PLAIN_MESSAGE":
+                    tipo = 4;
+                    break;
+
+            }
+            Object mensaje = null;
+            JPanel panel = new JPanel();
+            Date fecha = new Date();
+            panel.setBackground(Color.BLACK);
+            switch (op3) {
+                case "Cadena":
+                    mensaje = "Mensaje";
+                    break;
+                case "Icono":
+                    mensaje = "Todavia no hay icono";
+                    break;
+                case "Componente":
+                    mensaje = panel;
+                    break;
+                case "Otros":
+                    mensaje = fecha;
+                    break;
+                case "Object[]":
+                    Object[] objeto = {"Mensaje","Todavia no hay icono",panel,fecha};
+                    mensaje = objeto;
+                    break;
+
+            }
+
+            int confirmar = 0;
+            switch (op4) {
+                case "DEFAULT_OPTION":
+                    confirmar = 0;
+                    break;
+                case "YES_NO_OPTION":
+                    confirmar=1;
+                    break;
+                case "YES_NO_CANCEL_OPTION":
+                    confirmar=2;
+                    break;
+                case "OK_CANCEL_OPTION":
+                    confirmar=3;
+                    break;
+                
+
+            }
+
+            Object[] opcion = null;
+            switch (op5) {
+                case "String[]":
+                    String[] opciones={"Amarillo", "Azul","Rojo"};
+                    opcion = opciones;
+                    break;
+                case "Icon[]":
+
+                    opcion=null;
+                    break;
+                case "Object[]":
+                    Object[] opcionesO={"Hola",panel,fecha};
+                    opcion=opcionesO;
+                    break;
+                
+
+            }
+
+            String[] items = {"Amarillo", "Azul","Rojo"};
+            //JComboBox combo = new JComboBox(items);
+
+            switch (op1) {
+                case "Mensaje":
+                    JOptionPane.showMessageDialog(null, mensaje, op1, tipo);
+                    break;
+                case "Confirmar":
+                    JOptionPane.showConfirmDialog(null, mensaje, op1, confirmar,tipo);
+                    break;
+                case "Opción":
+                    JOptionPane.showOptionDialog(null, mensaje, op1, confirmar, tipo,
+                    null, opcion, null);
+                    break;
+                case "Entrada":
+                    if(op6.equals("Campo de texto"))
+                    JOptionPane.showInputDialog(null, mensaje, op1, tipo);
+                    if(op6.equals("Combo"))
+                    JOptionPane.showInputDialog(null, mensaje, op1, tipo,null,items,null);
+                    break;
+            }
         }
 
     }
