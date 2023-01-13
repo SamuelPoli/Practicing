@@ -33,6 +33,7 @@ class Lienzo extends JPanel{
     private JButton boton;
     private ButtonGroup grupo1, grupo2 , grupo3 , grupo4 , grupo5, grupo6;
     private Box caja1, caja2, caja3, caja4, caja5, caja6;
+    private JRadioButton[] botones;
     
 
     public Lienzo(){
@@ -62,34 +63,36 @@ class Lienzo extends JPanel{
         caja6 = Box.createVerticalBox();
         caja6.setBorder(new TitledBorder("Entrada"));
 
-        crea_boton("Mensaje", 1);
-        crea_boton("Confirmar", 1);
-        crea_boton("Opción", 1);
-        crea_boton("Entrada", 1);
+        botones=new JRadioButton[23];
+
+        crea_boton("Mensaje", 1, 0);
+        crea_boton("Confirmar", 1, 1);
+        crea_boton("Opción", 1, 2);
+        crea_boton("Entrada", 1, 3);
         
-        crea_boton("ERROR_MESSAGE", 2);
-        crea_boton("INFORMATION_MESSAGE", 2);
-        crea_boton("WARNING_MESSAGE", 2);
-        crea_boton("QUESTION_MESSAGE", 2);
-        crea_boton("PLAIN_MESSAGE", 2);
+        crea_boton("ERROR_MESSAGE", 2, 4);
+        crea_boton("INFORMATION_MESSAGE", 2, 5);
+        crea_boton("WARNING_MESSAGE", 2, 6);
+        crea_boton("QUESTION_MESSAGE", 2, 7);
+        crea_boton("PLAIN_MESSAGE", 2, 8);
 
-        crea_boton("Cadena", 3);
-        crea_boton("Icono", 3);
-        crea_boton("Componente", 3);
-        crea_boton("Otros", 3);
-        crea_boton("Object", 3);
+        crea_boton("Cadena", 3, 9);
+        crea_boton("Icono", 3, 10);
+        crea_boton("Componente", 3, 11);
+        crea_boton("Otros", 3, 12);
+        crea_boton("Object", 3, 13);
 
-        crea_boton("DEFAULT_OPTION", 4);
-        crea_boton("YES_NO_OPTION", 4);
-        crea_boton("YES_NO_CANCEL_OPTION", 4);
-        crea_boton("OK_CANCEL_OPTION", 4);
+        crea_boton("DEFAULT_OPTION", 4, 14);
+        crea_boton("YES_NO_OPTION", 4, 15);
+        crea_boton("YES_NO_CANCEL_OPTION", 4, 16);
+        crea_boton("OK_CANCEL_OPTION", 4, 17);
 
-        crea_boton("String", 5);
-        crea_boton("Icon", 5);
-        crea_boton("Object", 5);
+        crea_boton("String", 5, 18);
+        crea_boton("Icon", 5, 19);
+        crea_boton("Object", 5, 20);
 
-        crea_boton("Campo de texto", 6);
-        crea_boton("Combo", 6);
+        crea_boton("Campo de texto", 6, 21);
+        crea_boton("Combo", 6, 22);
         
 
         lienzo1.add(caja1);
@@ -111,7 +114,7 @@ class Lienzo extends JPanel{
         add(lienzo2, BorderLayout.SOUTH);
     }
 
-    private JRadioButton crea_boton (String nombre, int grupo){
+    private JRadioButton crea_boton (String nombre, int grupo, int num){
 
         JRadioButton boton = new JRadioButton(nombre);
         switch (grupo) {
@@ -142,6 +145,7 @@ class Lienzo extends JPanel{
         
             
         }
+        botones[num]=boton;
         return boton;
 
     }
@@ -150,7 +154,36 @@ class Lienzo extends JPanel{
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            JOptionPane.showConfirmDialog(null, "Vas bien");            
+            //JOptionPane.showConfirmDialog(null, "Vas bien"); 
+
+            int contador = 1;
+            String op1 ="", op2="", op3="", op4="", op5="", op6="";
+            for (JRadioButton b : botones) {
+
+                if(b.isSelected()){
+                    if(contador==1){
+                        op1=b.getText();
+                        contador++;
+                    } else if(contador==2){
+                        op2=b.getText();
+                        contador++;
+                    }else if(contador==3){
+                        op3=b.getText();
+                        contador++;
+                    }else if(contador==4){
+                        op4=b.getText();
+                        contador++;
+                    }else if(contador==5){
+                        op5=b.getText();
+                        contador++;
+                    }else if(contador==6){
+                        op6=b.getText();
+                    }
+                }
+            
+            }
+            
+            System.out.println(op1+op2+op3+op4+op5+op6);
         }
 
     }
