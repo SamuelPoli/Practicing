@@ -33,7 +33,7 @@ class LaminaConImagen extends JPanel {
     //Cargar imagen en memoria mediante el constructor
     public LaminaConImagen(){
         //File miimagen = new File("C:/Users/001TIC981/Documents/Practicing/Graficos/icono.png");
-        
+        //Excepcion comprobada, java nos obliga a utilizar try-catch
         try {
             imagen=ImageIO.read(new File("C:/Users/001TIC981/Documents/Practicing/Graficos/pin2.png"));
         } catch (IOException e) {
@@ -46,6 +46,7 @@ class LaminaConImagen extends JPanel {
     public void paintComponent(Graphics g){
         super.paintComponent(g);
 
+        //Excepcion no comprobada, el programador debe hacer para controlar el error
         if (imagen == null)
             g.drawString("No se encuentra la imagen", 20, 20);
         else{
