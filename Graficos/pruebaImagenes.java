@@ -46,6 +46,9 @@ class LaminaConImagen extends JPanel {
     public void paintComponent(Graphics g){
         super.paintComponent(g);
 
+        if (imagen == null)
+            g.drawString("No se encuentra la imagen", 20, 20);
+        else{
         int ancho = imagen.getWidth(this);
         int altura = imagen.getHeight(this);
         
@@ -55,7 +58,7 @@ class LaminaConImagen extends JPanel {
                 g.copyArea(0, 0, ancho, altura, ancho*i, altura*j);                
             }
         }
-
+        }
     }
 
     private Image imagen;
