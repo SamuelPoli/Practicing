@@ -36,7 +36,7 @@ public class Serializando {
     }
 }
 
-class empleado extends Persona implements Serializable{
+class empleado extends Persona {
 
     
     private double sueldo;
@@ -105,7 +105,7 @@ class empleado extends Persona implements Serializable{
 }
 
 
-class Jefatura extends empleado implements Serializable{
+class Jefatura extends empleado {
 
     private double incentivo;
     
