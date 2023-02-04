@@ -1,0 +1,5 @@
+Streams y Buffers
+
+Tanto los streams como los buffers abren una conexión al equipo para enviar datos, la diferencia radica
+en que los streams envian la información dato por dato, mientras que en los buffers se carga primero toda la infomación
+en un espacio de memoria y a partir de allí se lee o se escribe la información, lo cual los hace mas rapidos.
