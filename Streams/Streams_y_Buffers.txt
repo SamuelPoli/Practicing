@@ -1,5 +1,8 @@
-Streams y Buffers
+FileReader FileWriter
+FileInputStream FileOutputStream
+BufferedReader BufferedWriter
 
-Tanto los streams como los buffers abren una conexión al equipo para enviar datos, la diferencia radica
-en que los streams envian la información dato por dato, mientras que en los buffers se carga primero toda la infomación
+Reader y Writer, los streams y los buffers abren una conexión al equipo para enviar datos, la diferencia radica
+en que los Reader y Writer envian la información dato por dato, mientras que en los buffers se carga primero toda la infomación
 en un espacio de memoria y a partir de allí se lee o se escribe la información, lo cual los hace mas rapidos.
+En el caso de los streams se envan bytes, los cuales luego se deben rearmar para obtener el archivo.
