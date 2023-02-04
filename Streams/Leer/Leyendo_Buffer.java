@@ -5,16 +5,16 @@ import java.io.*;
 public class Leyendo_Buffer {
 
     public static void main(String[] args) {
-        Leer_archivo lectura = new Leer_archivo();
+        Leer_archivoB lectura = new Leer_archivoB();
         lectura.leer();
     }
 }
 
-class Leer_archivo{
+class Leer_archivoB{
     public void leer(){
         try {
-            FileReader archivo = new FileReader("Streams/Leer/archivo.txt");
-            BufferedReader mibuffer = new BufferedReader(archivo);
+            String ruta = "Streams/Leer/archivo.txt";
+            BufferedReader mibuffer = new BufferedReader(new FileReader(ruta));
             String linea = mibuffer.readLine();
             while(linea!=null){
                 
@@ -22,7 +22,7 @@ class Leer_archivo{
                 linea = mibuffer.readLine();
                 
             }
-            archivo.close();
+            mibuffer.close();
         } catch (Exception e) {
             System.out.println("No se encuentra el archivo");
         }
