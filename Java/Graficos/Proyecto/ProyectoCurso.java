@@ -1,4 +1,4 @@
-package Graficos.Proyecto;
+package Java.Graficos.Proyecto;
 
 import javax.swing.*;
 

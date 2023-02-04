@@ -1,4 +1,4 @@
-package Graficos;
+package Java.Graficos;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;

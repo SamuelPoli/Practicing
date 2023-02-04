@@ -1,4 +1,4 @@
-package Streams.Escribir;
+package Java.Streams.Escribir;
 
 import java.io.*;
 

@@ -1,4 +1,4 @@
-package Graficos;
+package Java.Graficos;
 
 import java.awt.Color;
 import java.awt.event.*;

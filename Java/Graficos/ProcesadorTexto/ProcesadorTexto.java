@@ -1,4 +1,4 @@
-package Graficos.ProcesadorTexto;
+package Java.Graficos.ProcesadorTexto;
 
 import javax.swing.*;
 import java.awt.*;
