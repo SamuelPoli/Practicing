@@ -17,7 +17,7 @@ public class Renombrador {
 class Marco extends JFrame{
 
     public Marco(){
-        setBounds(200,200,500,300);
+        setBounds(200,200,800,250);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         Lamina lienzo = new Lamina();
         add(lienzo);
@@ -60,19 +60,19 @@ class Lamina extends JPanel{
         add(Caja3);
         add(Caja4);
     
-        boton.adddactionlistener(new AccionBoton());
+        boton.addActionListener(new AccionBoton());
 
     }
     private class AccionBoton implements ActionListener{
 
         @Override
         public void actionPerformed(ActionEvent e) {
-        String ruta=Campo1.gettext();
-        String radicado = Campo2.gettext();
-        String consecutivo = Campo3.gettext();
-
-        CambiaNombre.renombrar(ruta,radicado,consecutiv);   
-            
+        String ruta=Campo1.getText();
+        String radicado = Campo2.getText();
+        String consecutivo = Campo3.getText();
+        
+        CambiaNombre.renombrar(ruta,radicado,consecutivo);
+        
         }
 
     }
@@ -80,6 +80,7 @@ class Lamina extends JPanel{
 
 class CambiaNombre{
 
-private static renombrar(String ruta, String radicado, String consecutiv){
-}
+    public static void renombrar(String ruta, String radicado, String consecutiv){
+    System.out.println(ruta + radicado + consecutiv);
+    }
 }
