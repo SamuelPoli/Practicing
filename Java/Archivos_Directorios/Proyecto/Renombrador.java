@@ -2,15 +2,14 @@ package Java.Archivos_Directorios.Proyecto;
 
 import javax.swing.*;
 import java.awt.event.*;
+import java.io.File;
 import java.awt.*;
 
 public class Renombrador {
     public static void main(String[] args) {
 
         Marco VentanaPrograma = new Marco();
-        VentanaPrograma.setVisible(true);
-
-        
+        VentanaPrograma.setVisible(true);  
     }
 }
 
@@ -81,6 +80,22 @@ class Lamina extends JPanel{
 class CambiaNombre{
 
     public static void renombrar(String ruta, String radicado, String consecutiv){
-    System.out.println(ruta + radicado + consecutiv);
+        try{
+        File ruta_modificar = new File(ruta);
+        File[] nombres_archivos = ruta_modificar.listFiles();
+        //System.out.println(ruta_modificar.getAbsolutePath());
+        int consecutivo = Integer.parseInt(consecutiv);
+        int rad = Integer.parseInt(radicado);
+        for (File s : nombres_archivos) {
+            String nuevo_nombre = ruta.concat(File.separator).concat(Integer.toString(rad)).concat("_").concat(Integer.toString(consecutivo)).concat("_").concat(s.getName());
+            s.renameTo(new File(nuevo_nombre));
+            //System.out.println(nuevo_nombre);
+            consecutivo++;
+            }
+            JOptionPane.showMessageDialog(null, "Se han actualizado los nombres de los archivos indicados en la ruta");
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Ha ocurrido el siguiente error: "+e.getMessage());
+        }
+        
     }
 }
