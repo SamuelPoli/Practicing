@@ -60,14 +60,18 @@ class Lamina extends JPanel{
         add(Caja3);
         add(Caja4);
     
-        
+        boton.adddactionlistener(new AccionBoton());
 
     }
     private class AccionBoton implements ActionListener{
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            
+        String ruta=Campo1.gettext();
+        String radicado = Campo2.gettext();
+        String consecutivo = Campo3.gettext();
+
+        CambiaNombre.renombrar(ruta,radicado,consecutiv);   
             
         }
 
@@ -76,4 +80,6 @@ class Lamina extends JPanel{
 
 class CambiaNombre{
 
+private static renombrar(String ruta, String radicado, String consecutiv){
+}
 }
