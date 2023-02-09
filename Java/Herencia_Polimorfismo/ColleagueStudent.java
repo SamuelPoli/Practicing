@@ -1,3 +1,4 @@
+package Java.Herencia_Polimorfismo;
 public class ColleagueStudent extends Student{
     
     public ColleagueStudent(){}

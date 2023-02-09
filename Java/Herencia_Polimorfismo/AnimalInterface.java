@@ -1,3 +1,4 @@
+package Java.Herencia_Polimorfismo;
 public class AnimalInterface {
     protected String kind;
 
