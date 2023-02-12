@@ -11,7 +11,7 @@ import java.awt.event.*;
 public class UsoThreads {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
 		
 		JFrame marco=new MarcoRebote();
 		

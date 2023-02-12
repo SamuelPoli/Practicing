@@ -46,5 +46,9 @@ public class Empleado {
         return "Este empleado se llama: "+nombre+
         " tiene un sueldo de: "+sueldo+" y trabaja desde: "+altaContrato;
     }
+
+    public String toString(){
+        return "[Nombre] "+nombre+"[Sueldo] "+sueldo;
+    }
  
 }

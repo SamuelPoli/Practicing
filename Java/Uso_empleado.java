@@ -63,7 +63,7 @@ public class Uso_empleado {
     }
 }
 
-class empleado extends Persona implements Comparable, Trabajadores{
+class empleado extends Persona implements Comparable<empleado>, Trabajadores{
 
     
     private double sueldo;
@@ -123,12 +123,12 @@ class empleado extends Persona implements Comparable, Trabajadores{
     }
 
     @Override
-    public int compareTo(Object o) {
-        empleado otroEmpleado = (empleado) o;
+    public int compareTo(empleado o) {
         
-        if(this.sueldo<otroEmpleado.sueldo)
+        
+        if(this.sueldo<o.sueldo)
             return -1;
-        if(this.sueldo>otroEmpleado.sueldo)
+        if(this.sueldo>o.sueldo)
             return 1;
         else
             return 0;
