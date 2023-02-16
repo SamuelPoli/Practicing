@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.io.*;
 import java.net.*;
 import java.awt.*;
+import java.util.*;
 
 public class Servidor {
     public static void main(String[] args) {
@@ -15,6 +16,7 @@ public class Servidor {
 
 class MarcoServidor extends JFrame implements Runnable{
     private JTextArea area;
+    private ArrayList<UsuariosConectados> listadoUsuarios;
     public MarcoServidor(){
 
         setBounds(300, 100, 250, 400);
@@ -24,6 +26,7 @@ class MarcoServidor extends JFrame implements Runnable{
         area = new JTextArea();
         lamina.add(area, BorderLayout.CENTER);
         add(lamina);
+        listadoUsuarios = new ArrayList<UsuariosConectados>();
         Thread mihilo = new Thread(this);
         mihilo.start();
     }
@@ -32,8 +35,11 @@ class MarcoServidor extends JFrame implements Runnable{
     public void run() {
         try {
             ServerSocket socketServidor = new ServerSocket(9999);
+            ServerSocket socketServidor2 = new ServerSocket(9090);
             String nick, ip, mensaje;
+            UsuariosConectados usuario;
             PaqueteEnvio paqueteRecibido;
+
 
             while(true){
                 Socket misocket=socketServidor.accept();
@@ -53,6 +59,21 @@ class MarcoServidor extends JFrame implements Runnable{
                 ObjectOutputStream paquetereenvio = new ObjectOutputStream(enviaDestinatario.getOutputStream());
                 paquetereenvio.writeObject(paqueteRecibido);
                 
+                //Recibir usuarios conectados y reenviarlos
+                Socket misocketUsuarios=socketServidor2.accept();
+                ObjectInputStream infousuarios = new ObjectInputStream(misocketUsuarios.getInputStream());
+                usuario = (UsuariosConectados) infousuarios.readObject();
+                
+                listadoUsuarios.add(usuario);
+                
+                for (UsuariosConectados e : listadoUsuarios) {
+                    Socket enviaUsuario = new Socket(e.getIp(), 9000);
+                    ObjectOutputStream paqueteUsuario = new ObjectOutputStream(enviaUsuario.getOutputStream());
+                    paqueteUsuario.writeObject(listadoUsuarios);
+                    enviaUsuario.close();
+                    paqueteUsuario.close();
+                }
+
                 paquetereenvio.close();
                 enviaDestinatario.close();
                 misocket.close();
