@@ -82,21 +82,29 @@ class MarcoServidor extends JFrame implements Runnable{
             ServerSocket socketServidor2 = new ServerSocket(9090);
             UsuariosConectados usuario;
             //Recibir usuarios conectados y reenviarlos
-            Socket misocketUsuarios=socketServidor2.accept();
-            ObjectInputStream infousuarios = new ObjectInputStream(misocketUsuarios.getInputStream());
-            usuario = (UsuariosConectados) infousuarios.readObject();
-            area.append("Ha iniciado sesión el usuario: "+usuario.getNick());
-            /* 
-            listadoUsuarios.add(usuario);
+            while (true) {
+                Socket misocketUsuarios=socketServidor2.accept();
+                ObjectInputStream infousuarios = new ObjectInputStream(misocketUsuarios.getInputStream());
+                usuario = (UsuariosConectados) infousuarios.readObject();
+                area.append("Ha iniciado sesión el usuario: "+usuario.getNick());
             
+                listadoUsuarios.add(usuario);
+                for (UsuariosConectados e : listadoUsuarios) {
+                System.out.println(e.getNick());
+                
+            }
+            /* 
             for (UsuariosConectados e : listadoUsuarios) {
                 Socket enviaUsuario = new Socket(e.getIp(), 9000);
                 ObjectOutputStream paqueteUsuario = new ObjectOutputStream(enviaUsuario.getOutputStream());
                 paqueteUsuario.writeObject(listadoUsuarios);
                 enviaUsuario.close();
                 paqueteUsuario.close();
+            }*/
+            misocketUsuarios.close();
+            infousuarios.close();
             }
-            */
+            
             } catch (Exception e){
                 System.out.println(e.getMessage());
             }
