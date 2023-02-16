@@ -29,15 +29,17 @@ class MarcoServidor extends JFrame implements Runnable{
         listadoUsuarios = new ArrayList<UsuariosConectados>();
         Thread mihilo = new Thread(this);
         mihilo.start();
+        Thread hilo2= new Thread(new HiloUsuarios());
+        hilo2.start();
     }
 
     @Override
     public void run() {
         try {
             ServerSocket socketServidor = new ServerSocket(9999);
-            ServerSocket socketServidor2 = new ServerSocket(9090);
+            
             String nick, ip, mensaje;
-            UsuariosConectados usuario;
+            
             PaqueteEnvio paqueteRecibido;
 
 
@@ -59,28 +61,79 @@ class MarcoServidor extends JFrame implements Runnable{
                 ObjectOutputStream paquetereenvio = new ObjectOutputStream(enviaDestinatario.getOutputStream());
                 paquetereenvio.writeObject(paqueteRecibido);
                 
-                //Recibir usuarios conectados y reenviarlos
-                Socket misocketUsuarios=socketServidor2.accept();
-                ObjectInputStream infousuarios = new ObjectInputStream(misocketUsuarios.getInputStream());
-                usuario = (UsuariosConectados) infousuarios.readObject();
                 
-                listadoUsuarios.add(usuario);
-                
-                for (UsuariosConectados e : listadoUsuarios) {
-                    Socket enviaUsuario = new Socket(e.getIp(), 9000);
-                    ObjectOutputStream paqueteUsuario = new ObjectOutputStream(enviaUsuario.getOutputStream());
-                    paqueteUsuario.writeObject(listadoUsuarios);
-                    enviaUsuario.close();
-                    paqueteUsuario.close();
-                }
-
                 paquetereenvio.close();
                 enviaDestinatario.close();
                 misocket.close();
+
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         
     }
+    
+    public class HiloUsuarios implements Runnable{
+
+        @Override
+        public void run() {
+            //Abrir socket server para recibir conexiones
+            try{
+            ServerSocket socketServidor2 = new ServerSocket(9090);
+            UsuariosConectados usuario;
+            //Recibir usuarios conectados y reenviarlos
+            Socket misocketUsuarios=socketServidor2.accept();
+            ObjectInputStream infousuarios = new ObjectInputStream(misocketUsuarios.getInputStream());
+            usuario = (UsuariosConectados) infousuarios.readObject();
+            area.append("Ha iniciado sesión el usuario: "+usuario.getNick());
+            /* 
+            listadoUsuarios.add(usuario);
+            
+            for (UsuariosConectados e : listadoUsuarios) {
+                Socket enviaUsuario = new Socket(e.getIp(), 9000);
+                ObjectOutputStream paqueteUsuario = new ObjectOutputStream(enviaUsuario.getOutputStream());
+                paqueteUsuario.writeObject(listadoUsuarios);
+                enviaUsuario.close();
+                paqueteUsuario.close();
+            }
+            */
+            } catch (Exception e){
+                System.out.println(e.getMessage());
+            }
+            
+        }
+    
+    }
 }
+
+class PaqueteEnvio implements Serializable{
+    
+    private String nick, ip, mensaje;
+
+    public String getNick() {
+        return nick;
+    }
+
+    public void setNick(String nick) {
+        this.nick = nick;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
+    }
+
+    
+}
+
