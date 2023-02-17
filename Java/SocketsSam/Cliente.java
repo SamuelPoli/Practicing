@@ -149,16 +149,25 @@ class Lienzo extends JPanel implements Runnable{
                 Socket usuarios_serv=servidor_usuarios.accept();
                 ObjectInputStream usuariosConect = new ObjectInputStream(usuarios_serv.getInputStream());
                 usuarios = (ArrayList<UsuariosConectados>) usuariosConect.readObject();
-                for (UsuariosConectados e : usuarios) {
-                    for (UsuariosConectados i : lista2) {
-                        if(i==null && e.getNick()!=Lienzo.this.nick.getText()){
+
+                //Evaluar si la lista está vacía y añadir los usuarios
+                if(lista2.size()==0){
+                    for (UsuariosConectados e : usuarios) {
+                        if(e.getNick()!=Lienzo.this.nick.getText()){
                             lista2.add(e);
                         }
+                    }
+                }else{
+                //Si la lista no está vacía comienza a comparar si los usuarios ya están añadidos
+                // y añade solo los usuarios que no coincidan
+                for (UsuariosConectados e : usuarios) {
+                    for (UsuariosConectados i : lista2) {
                         if(e.getNick()!=i.getNick()){
                             lista2.add(e);
                         }
                     }
-                }
+                }}
+                
                 //añadir usuarios al combobox
                 for (UsuariosConectados e : lista2) {
                 
