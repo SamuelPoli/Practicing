@@ -75,7 +75,7 @@ class Lienzo extends JPanel implements Runnable{
             public void actionPerformed(ActionEvent e) {
 
                 campochat.append("\n" + Lienzo.this.nick.getText()+": "+ campo.getText());
-                String nickSeleccion = campo.getSelectedText();
+                String nickSeleccion = (String) combo.getSelectedItem();
                 String ipEnvio="";
                 for (UsuariosConectados x : lista2) {
                     if(nickSeleccion.equalsIgnoreCase(x.getNick())){
@@ -151,6 +151,9 @@ class Lienzo extends JPanel implements Runnable{
                 usuarios = (ArrayList<UsuariosConectados>) usuariosConect.readObject();
                 for (UsuariosConectados e : usuarios) {
                     for (UsuariosConectados i : lista2) {
+                        if(i==null && e.getNick()!=Lienzo.this.nick.getText()){
+                            lista2.add(e);
+                        }
                         if(e.getNick()!=i.getNick()){
                             lista2.add(e);
                         }
