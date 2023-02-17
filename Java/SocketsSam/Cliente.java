@@ -29,30 +29,32 @@ class Marco extends JFrame{
 
 class Lienzo extends JPanel implements Runnable{
     private JTextArea campochat;
-    private JTextField campo, ip;
+    private JTextField campo;
     private JLabel nick;
-    private ArrayList<UsuariosConectados> usuarios;
+    private ArrayList<UsuariosConectados> usuarios, lista2;
     private JComboBox combo;
+    private UsuariosConectados info;
 
     public Lienzo(String nick){
         JLabel etiqueta = new JLabel("-Chat-");
         campochat = new JTextArea();
         campo = new JTextField(20);
         this.nick = new JLabel(nick);
-        ip = new JTextField(10);
-        combo = new JComboBox<UsuariosConectados>();
+      
+        combo = new JComboBox<String>();
         JButton boton = new JButton("Enviar");
         add(this.nick);
         add(etiqueta);
-        add(ip);
+        add(combo);
         add(campochat);
         add(campo);
         add(boton);
-        add(combo);
+        
+        lista2 = new ArrayList<UsuariosConectados>();
         Socket misocket1;
         try {
             misocket1 = new Socket("10.1.0.4", 9090);
-            UsuariosConectados info = new UsuariosConectados();
+            info = new UsuariosConectados();
             info.setNick(this.nick.getText());
         
             String miIp = misocket1.getLocalAddress().toString();
@@ -73,11 +75,18 @@ class Lienzo extends JPanel implements Runnable{
             public void actionPerformed(ActionEvent e) {
 
                 campochat.append("\n" + Lienzo.this.nick.getText()+": "+ campo.getText());
+                String nickSeleccion = campo.getSelectedText();
+                String ipEnvio="";
+                for (UsuariosConectados x : lista2) {
+                    if(nickSeleccion.equalsIgnoreCase(x.getNick())){
+                        ipEnvio=x.getIp();
+                    }
+                }
                 try {
                     Socket misocket = new Socket("10.1.0.4", 9999);
                     PaqueteEnvio datos = new PaqueteEnvio();
                     datos.setNick(Lienzo.this.nick.getText());
-                    datos.setIp(ip.getText());
+                    datos.setIp(ipEnvio);
                     datos.setMensaje(campo.getText());
                     ObjectOutputStream paquetedatos = new ObjectOutputStream(misocket.getOutputStream());
                     paquetedatos.writeObject(datos);
@@ -133,14 +142,23 @@ class Lienzo extends JPanel implements Runnable{
         public void run() {
             try {
             //Socket que va a estar recibiendo la lista de usuarios conectados
-            ServerSocket servidor_usuarios = new ServerSocket(9000);  
+            ServerSocket servidor_usuarios = new ServerSocket(9000);
+            
             //Recibir listado del servidor 
             while(true){    
                 Socket usuarios_serv=servidor_usuarios.accept();
                 ObjectInputStream usuariosConect = new ObjectInputStream(usuarios_serv.getInputStream());
                 usuarios = (ArrayList<UsuariosConectados>) usuariosConect.readObject();
-                //añadir usuarios al combobox
                 for (UsuariosConectados e : usuarios) {
+                    for (UsuariosConectados i : lista2) {
+                        if(e.getNick()!=i.getNick()){
+                            lista2.add(e);
+                        }
+                    }
+                }
+                //añadir usuarios al combobox
+                for (UsuariosConectados e : lista2) {
+                
                     combo.addItem(e.getNick());
                 }
             }
