@@ -170,9 +170,17 @@ class Lienzo extends JPanel implements Runnable{
                 
                 //añadir usuarios al combobox
                 for (UsuariosConectados e : lista2) {
-                
+                    if(e.getNick().equals(Lienzo.this.nick.getText()))
+                    return;
+                    else{
+                    
                     combo.addItem(e.getNick());
+                    
+                    }
                 }
+
+                usuariosConect.close();
+                usuarios_serv.close();
             }
             } catch (Exception e) {
                 
