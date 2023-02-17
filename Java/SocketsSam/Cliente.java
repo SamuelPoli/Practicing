@@ -51,21 +51,21 @@ class Lienzo extends JPanel implements Runnable{
         add(combo);
         Socket misocket1;
         try {
-            misocket1 = new Socket("192.168.0.7", 9090);
+            misocket1 = new Socket("10.1.0.4", 9090);
             UsuariosConectados info = new UsuariosConectados();
             info.setNick(this.nick.getText());
         
-            String miIp = misocket1.getInetAddress().toString();
+            String miIp = misocket1.getLocalAddress().toString();
             System.out.println(info.getNick()+" "+
                 miIp.substring(1));
-            info.setIp(miIp);
+            info.setIp(miIp.substring(1));
         
             ObjectOutputStream infoUsuario = new ObjectOutputStream(misocket1.getOutputStream());
             infoUsuario.writeObject(info);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        } 
+        }
         
         boton.addActionListener(new ActionListener(){
 
@@ -74,7 +74,7 @@ class Lienzo extends JPanel implements Runnable{
 
                 campochat.append("\n" + Lienzo.this.nick.getText()+": "+ campo.getText());
                 try {
-                    Socket misocket = new Socket("192.168.0.7", 9999);
+                    Socket misocket = new Socket("10.1.0.4", 9999);
                     PaqueteEnvio datos = new PaqueteEnvio();
                     datos.setNick(Lienzo.this.nick.getText());
                     datos.setIp(ip.getText());
@@ -96,6 +96,8 @@ class Lienzo extends JPanel implements Runnable{
         });
         Thread mihilo = new Thread(this);
         mihilo.start();
+        Thread hilo2 = new Thread(new HiloUsuarios());
+        hilo2.start();
 
     }
 
@@ -103,7 +105,7 @@ class Lienzo extends JPanel implements Runnable{
     public void run() {
         try {
             ServerSocket servidor_cliente = new ServerSocket(9090);
-            ServerSocket servidor_usuarios = new ServerSocket(9000);
+            
             String nick, ip, mensaje;
             PaqueteEnvio paqueteRecibido;
             
@@ -118,7 +120,22 @@ class Lienzo extends JPanel implements Runnable{
                 campochat.append("\n"+ nick +": "+mensaje);
                 cliente.close();
 
-                //Recibir listado del servidor 
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        
+    }
+
+    public class HiloUsuarios implements Runnable {
+
+        @Override
+        public void run() {
+            try {
+            //Socket que va a estar recibiendo la lista de usuarios conectados
+            ServerSocket servidor_usuarios = new ServerSocket(9000);  
+            //Recibir listado del servidor 
+            while(true){    
                 Socket usuarios_serv=servidor_usuarios.accept();
                 ObjectInputStream usuariosConect = new ObjectInputStream(usuarios_serv.getInputStream());
                 usuarios = (ArrayList<UsuariosConectados>) usuariosConect.readObject();
@@ -126,12 +143,13 @@ class Lienzo extends JPanel implements Runnable{
                 for (UsuariosConectados e : usuarios) {
                     combo.addItem(e.getNick());
                 }
-
             }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+            } catch (Exception e) {
+                
+            }
+            
         }
-        
+
     }
 }
 
