@@ -97,6 +97,7 @@ class MarcoServidor extends JFrame implements Runnable{
                 paqueteUsuario.writeObject(listadoUsuarios);
                 enviaUsuario.close();
                 paqueteUsuario.close();
+                System.out.println("Envia usuarios: "+listadoUsuarios);
                 
             }
            
